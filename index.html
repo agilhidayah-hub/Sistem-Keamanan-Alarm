@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Sistem Keamanan Ruang Multimedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a237e;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        h2 {
+            color: #1a237e;
+            font-size: 18px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #1a237e;
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: #283593;
+            font-size: 16px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        
+        .unit-box {
+            background: #f8f9fa;
+            border-left: 4px solid #1a237e;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .unit-title {
+            font-weight: 600;
+            color: #1a237e;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        
+        .spec-item {
+            padding-left: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .section-number {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analisis dan Strategi Sistem Keamanan Ruang Multimedia</h1>
+        <p class="subtitle">Berbasis ESP32, LoRa Ra-02, dan Dual-Siren System</p>
+        
+        <h2><span class="section-number">1</span> PENDAHULUAN</h2>
+        <p>Rancangan ini bertujuan untuk mengamankan Ruang Multimedia (Master) dengan sistem peringatan terintegrasi di Ruang Meeting (Eksekutor). Penggunaan teknologi LoRa (Long Range) dipilih untuk menjamin penetrasi sinyal yang kuat menembus dinding gedung yang tidak bisa dijangkau oleh WiFi standar.</p>
+        
+        <h2><span class="section-number">2</span> SPESIFIKASI PERANGKAT KERAS</h2>
+        <p>Sistem ini menggunakan konfigurasi Master-Slave dengan rincian sebagai berikut:</p>
+        
+        <div class="unit-box">
+            <div class="unit-title">Unit Master (Ruang Multimedia):</div>
+            <div class="spec-item">• 1x ESP32 (Controller)</div>
+            <div class="spec-item">• 1x LoRa Ra-02 (Transmitter)</div>
+            <div class="spec-item">• 2x Sensor PIR (Deteksi gerakan ruang)</div>
+            <div class="spec-item">• 1x IR Beam Sensor (Deteksi akses pintu)</div>
+            <div class="spec-item">• 1x Modul Relay & Sirine SFB-522 220V (Alarm lokal)</div>
+        </div>
+        
+        <div class="unit-box">
+            <div class="unit-title">Unit Eksekutor (Ruang Meeting):</div>
+            <div class="spec-item">• 1x ESP32 (Controller)</div>
+            <div class="spec-item">• 1x LoRa Ra-02 (Receiver)</div>
+            <div class="spec-item">• 1x Modul Relay & Sirine SFB-522 220V (Alarm jarak jauh)</div>
+        </div>
+        
+        <h2><span class="section-number">3</span> ANALISIS KEUNGGULAN RANCANGAN</h2>
+        <ul>
+            <li><strong>Dual-Alert System:</strong> Aktivasi sirine di kedua ruangan memberikan efek kejut psikologis bagi penyusup di Ruang Multimedia, sekaligus memberikan peringatan instan bagi personil di Ruang Meeting.</li>
+            <li><strong>Penetrasi Sinyal:</strong> Frekuensi 433MHz pada LoRa Ra-02 memiliki panjang gelombang yang lebih baik dalam melewati rintangan fisik (tembok beton dan furnitur) dibandingkan frekuensi 2.4GHz.</li>
+            <li><strong>Redundansi Sensor:</strong> Penggunaan kombinasi PIR dan Beam Sensor meminimalkan celah keamanan (blind spot) pada area pintu dan area dalam ruangan.</li>
+        </ul>
+        
+        <h2><span class="section-number">4</span> STRATEGI IMPLEMENTASI (OPTIMALISASI)</h2>
+        <p>Untuk meningkatkan keandalan sistem dari level hobi ke level keamanan profesional, berikut adalah strategi tambahan yang diterapkan:</p>
+        
+        <h3>A. Algoritma Anti-False Alarm (Logic Gate)</h3>
+        <p>Untuk menghindari sirine berbunyi karena gangguan kecil (hewan/perubahan suhu), sistem akan diprogram dengan logika:</p>
+        <ul>
+            <li><strong>PIR Confirmation:</strong> Sirine hanya akan aktif jika kedua sensor PIR terpicu dalam jeda waktu kurang dari 3 detik, ATAU jika IR Beam terputus secara total.</li>
+        </ul>
+        
+        <h3>B. Protokol Komunikasi Acknowledge (ACK)</h3>
+        <p>LoRa akan bekerja dengan sistem dua arah singkat:</p>
+        <ul>
+            <li>Master mengirim sinyal bahaya.</li>
+            <li>Eksekutor menerima sinyal, menyalakan sirine, dan mengirim balik kode "DITERIMA".</li>
+            <li>Jika Master tidak menerima kode "DITERIMA", Master akan terus mengirim ulang sinyal bahaya setiap 500ms hingga koneksi terverifikasi.</li>
+        </ul>
+        
+        <h3>C. Sistem Heartbeat (Koneksi Stabil)</h3>
+        <p>Master akan mengirimkan sinyal "Ping" setiap 60 detik ke Eksekutor. Jika Eksekutor kehilangan sinyal "Ping" selama lebih dari 3 menit, lampu indikator pada Eksekutor akan menyala/berkedip sebagai tanda bahwa sistem di Ruang Multimedia mengalami gangguan (mati daya atau disabotase).</p>
+        
+        <h2><span class="section-number">5</span> KEAMANAN INSTALASI LISTRIK (220V AC)</h2>
+        <p>Mengingat penggunaan Sirine 220V, standar instalasi berikut wajib dipenuhi:</p>
+        <ul>
+            <li><strong>Optoisolator:</strong> Menggunakan modul relay dengan fitur optocoupler untuk mencegah lonjakan arus AC masuk ke sirkuit ESP32.</li>
+            <li><strong>Separation:</strong> Kabel daya AC 220V harus dipisahkan jalurnya dari kabel data sensor untuk menghindari induksi elektromagnetik yang dapat menyebabkan data sensor error.</li>
+        </ul>
+        
+        <h2><span class="section-number">6</span> KESIMPULAN</h2>
+        <div class="highlight">
+            <p>Rancangan sistem ini sangat layak untuk diimplementasikan. Dengan integrasi LoRa dan strategi Heartbeat, sistem ini memiliki ketahanan yang tinggi terhadap gangguan sinyal dan percobaan sabotase fisik pada jalur kabel komunikasi.</p>
+        </div>
+    </div>
+</body>
+  </html>
